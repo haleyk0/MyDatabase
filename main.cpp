@@ -7,10 +7,17 @@ int main(){
         getline(cin, line);
         stringstream ss(line);
 
-        string cmd;
+        string cmd, key, value;
         ss>>cmd;
-
-        if (cmd=="EXIT"){
+        if (cmd=="SET"){
+            ss>>key>>value;
+            //set function
+        }
+        else if (cmd=="GET"){
+            ss>>key;
+            //get function
+        }
+        else if (cmd=="EXIT"){
             break;
         }
     }
