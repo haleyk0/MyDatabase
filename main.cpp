@@ -1,3 +1,5 @@
+//hjk0056
+
 #include "functions.h"
 
 int main(){

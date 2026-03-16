@@ -1,3 +1,5 @@
+//hjk0056
+
 #ifndef FUNC
 #define FUNC
 
