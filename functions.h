@@ -20,10 +20,12 @@ string filename="data.db";
 void setVal(string key, string value, bool write=true){
     for (int i=0; i<db.size(); i++){
         if (db[i].key==key){
+            if (db[i].value==value) return;
             db[i].value=value;
             if (write){
                 ofstream file(filename, ios::app);
                 file <<"SET " << key << " " << value << endl;
+                file.close();
             }
             return;
         }
@@ -33,6 +35,7 @@ void setVal(string key, string value, bool write=true){
     if (write){
         ofstream file(filename, ios::app);
         file<<"SET "<<key<<" "<<value<<endl;
+        file.close();
     }
 }
 
