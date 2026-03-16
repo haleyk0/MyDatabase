@@ -17,20 +17,23 @@ vector<Pair>db;
 
 string filename="data.db";
 
-void setVal(string key, string value){
+void setVal(string key, string value, bool write=true){
     for (int i=0; i<db.size(); i++){
         if (db[i].key==key){
             db[i].value=value;
-            goto write;
+            if (write){
+                ofstream file(filename, ios::app);
+                file <<"SET " << key << " " << value << endl;
+            }
+            return;
         }
     }
 
     db.push_back({key, value});
-
-    write:
-        fstream file(filename, ios::app);
+    if (write){
+        ofstream file(filename, ios::app);
         file<<"SET "<<key<<" "<<value<<endl;
-        file.close();
+    }
 }
 
 string getVal(string key){
@@ -41,6 +44,24 @@ string getVal(string key){
     }
 
     return "NULL";
+}
+
+void loadDb() {
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        string cmd, key, value;
+        stringstream ss(line);
+
+        ss>>cmd>>key>>value;
+
+        if (cmd=="SET") {
+            setVal(key, value, false);
+        }
+    }
+
+    file.close();
 }
 
 #endif
