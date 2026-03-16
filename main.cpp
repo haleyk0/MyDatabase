@@ -1,6 +1,7 @@
 #include "functions.h"
 
 int main(){
+    loadDb();
     string line;
 
     while (true){
@@ -11,11 +12,11 @@ int main(){
         ss>>cmd;
         if (cmd=="SET"){
             ss>>key>>value;
-            //set function
+            setVal(key, value);
         }
         else if (cmd=="GET"){
             ss>>key;
-            //get function
+            cout<<getVal(key)<<endl;
         }
         else if (cmd=="EXIT"){
             break;
